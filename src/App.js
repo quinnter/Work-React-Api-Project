@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { getDataFromAPI } from './apis'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const pickRandomButtonString = () => {
+  const buttonStringOptions = ['Here we go again', 'Why me', 'Make it stop']
+  return buttonStringOptions[
+    Math.floor(Math.random() * buttonStringOptions.length)
+  ]
 }
 
-export default App;
+function App() {
+  const [buttonString, setButtonString] = React.useState("I'll take my chances")
+  const [mainContentString, setMainContentString] =
+    React.useState('Click if you dare.')
+
+  const handleGrabJokeButtonClick = () => {
+    // We can use .then() because axios returns a Promise
+    // You can look into Promises as extra homework!
+    getDataFromAPI().then((result) => {
+      setMainContentString(result.joke)
+      setButtonString(pickRandomButtonString)
+    })
+  }
+
+  return (
+    <div className="App">
+      <h3>{mainContentString}</h3>
+      <button onClick={() => handleGrabJokeButtonClick()}>{buttonString}</button>
+    </div>
+  )
+}
+
+export default App
