@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# React API Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Objective
 
-## Available Scripts
+- Create a single page (or more if you’d really like) react app that makes at least one API call
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Resources
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Feel free to use whatever API you can find but if you’re stuck for ideas you can check this github page. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Company API is strictly prohibited!  Try to find something you’re interested in, it makes the project a lot more fun. 😎
 
-### `npm test`
+[https://github.com/public-apis/public-apis](https://github.com/public-apis/public-apis)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The official React docs are also a great resource (duh!) 
 
-### `npm run build`
+[Getting Started - React](https://reactjs.org/docs/getting-started.html)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You don’t need to make a beautiful website but if you’d like some inspiration I find Dribbble is a great place to start.  If honing your HTML/CSS skills is something you’d like to do one great way is copying a design you like. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[Dribbble - Discover the World's Top Designers & Creative Professionals](https://dribbble.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+I have a template project that you can use to get started or you can start from scratch.  If you are forking my project you’ll need to run `npm install` once you’ve opened up the project in VS Code.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```jsx
+npx create-react-app my-app-name
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Then cd into your project folder
 
-## Learn More
+```jsx
+cd my-app-name
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If you have VS Code set up you should be able to type this into the terminal and it should open your project.  If not open up VS Code and find your new folder.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```jsx
+code
+```
 
-### Code Splitting
+The only package that you need to install is `axios` this is what we will use to make API calls. Otherwise it is up to you if you’d like to install any other libraries. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[https://github.com/axios/axios](https://github.com/axios/axios)
 
-### Analyzing the Bundle Size
+Inside VS Code open up the terminal window with `cmd + j` and then run 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```jsx
+npm install axios
+```
 
-### Making a Progressive Web App
+Now if you go to `package.json` you should see that `axios` is part of your dependencies list. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Creating Your API File
 
-### Advanced Configuration
+You could set up all this code in your `App.js` file but to keep things tidy we’ll put all our api calls in their own file. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+In the `src` folder create a new file called `apis.js` 
 
-### Deployment
+In that file you’ll want a similar set up to something like this
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```jsx
+import axios from 'axios';
+const url = 'https://your.fancyapi.com'
 
-### `npm run build` fails to minify
+export const getDataFromAPI = async (query) => {
+    const { data } = await axios.get(url)
+  return data;
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<aside>
+💡 If you need to send back dynamic data you can use formatted strings like so
+
+`https://your.fancyapi.com/${yourVariable}/restOfUrl`
+
+The key is using back ticks ``
+
+</aside>
+
+You then want to import your API into your App.js file
+
+```jsx
+import logo from './logo.svg';
+import './App.css';
+import { getDataFromAPI } from "./api";
+```
+
+Your first challenge is to figure out how to hook up your API to some sort of functionality in your app 🤓  I’ve got an example in my demo and a good place to start looking into is `componentDidMount` if you are using a traditional React Class component or `React.useEffect` if you are using a React Hook 👀  You also may want to do something different if you don’t want to call the API when the page first loads! The template I created is a reactionary API call, these two methods will help you if you want something on the page when it renders for the first time. 
+
+Now to start the project locally all you need to do is run 
+
+```jsx
+npm run start
+```
+
+---
+
+## Go Wild 🌿
+
+Be free and create whatever your heart desires! 
+
+### Bonus points awarded to those who take on the challenge of Typescript! 🥇
